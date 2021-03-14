@@ -3,13 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
-/*  {path: 'home', component: HeaderComponent},
-  {path: 'about', component: IntroComponent},
-  {path: 'services', component: ContentComponent},
-  {path: 'testimonials', component: TestimonialComponent},
-  {path: 'gallery', component: GalleryComponent},
-  {path: 'client', component: ClientComponent},
-  {path: 'pricing', component: PricingComponent},*/
 ];
 
 @NgModule({
@@ -18,4 +11,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const RoutingComponents = [];
