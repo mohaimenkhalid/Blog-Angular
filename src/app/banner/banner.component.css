@@ -1,0 +1,11 @@
+.banner-header-title {
+  font-size: 50px;
+  font-weight: 700;
+  border: 10px solid #ffffff;
+  padding: 3rem 1rem;
+}
+
+.hero-link {
+  text-decoration: none;
+
+}

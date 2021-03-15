@@ -4,7 +4,8 @@ import {BlogpostFeaturedComponent} from './blogpost/blogpost-featured/blogpost-f
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  {path: '', component: BlogpostFeaturedComponent},
+  {path: '', redirectTo: '', pathMatch: 'full' },
+  {path: '**', component: PageNotFoundComponent},
 ];
 
 @NgModule({
