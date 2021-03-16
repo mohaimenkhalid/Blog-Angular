@@ -18,7 +18,7 @@ class BlogController extends Controller
 {
     public function index(){
         $blogs = Blog::with(['blog_category.category', 'blog_tag.tag', 'user'])->get();
-        return response()->json(['blogs' => $blogs]);
+        return response()->json($blogs);
     }
 
     public function store(Request $request){
