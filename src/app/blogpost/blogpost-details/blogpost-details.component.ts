@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, ParamMap, Params, Router} from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import {BlogpostService} from '../blogpost.service';
+import {Blogpost} from '../blogpost';
+import {SharedService} from '../../shared/shared.service';
 
 @Component({
   selector: 'app-blogpost-details',
@@ -7,9 +12,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlogpostDetailsComponent implements OnInit {
 
-  constructor() { }
+  blog$: Blogpost;
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private blogPostService: BlogpostService,
+    private titleService: Title,
+    public sharedService: SharedService
+  ) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.blogPostService.getBlog(params.get('slug'))
+        .subscribe((data) => this.blog$ = data);
+    });
   }
 
 }
