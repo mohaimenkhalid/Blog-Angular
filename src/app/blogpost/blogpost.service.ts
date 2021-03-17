@@ -18,7 +18,7 @@ export class BlogpostService {
   }
 
   getBlogs(): Observable<Blogpost[]> {
-    return this.http.get<Blogpost[]>(this.baseUrl + 'api/all-blog-list').pipe(
+    return this.http.get<Blogpost[]>(this.baseUrl + '/api/all-blog-list').pipe(
       catchError(this.handleError)
     );
   }

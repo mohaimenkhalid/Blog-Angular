@@ -3,16 +3,22 @@
   <div class="row">
     <!-- post -->
     <div class="post col-xl-4" *ngFor="let blog of blogs">
-      <div class="post-thumbnail"><a href="post.html"><img src="https://d19m59y37dris4.cloudfront.net/blog/1-2-1/img/blog-post-1.jpeg" alt="..." class="img-fluid"></a></div>
+      <div class="post-thumbnail"><a [routerLink]="['/blog', blog.slug]"><img src="{{ this.sharedService.baseUrl + blog.cover_image_url }}" alt="..." class="img-fluid"></a></div>
       <div class="post-details">
-        <div class="post-meta d-flex justify-content-between">
+        <div class="post-meta">
+          <a class="badge badge-rounded badge-success" *ngFor="let category_list of blog.blog_category">
+              {{ category_list.category.name }}
+          </a>
+        </div>
+        <a [routerLink]="['/blog', blog.slug]">
+          <h3 class="h4">{{ blog.title }}</h3>
+        </a>
+        <footer class="post-footer d-flex align-items-center">
+          <a [routerLink]="['/blog', blog.slug]" class="author d-flex align-items-center flex-wrap">
+            <div class="avatar"><img src="https://d19m59y37dris4.cloudfront.net/blog/1-2-1/img/avatar-3.jpg" alt="..." class="img-fluid"></div>
+            <div class="title"><span>{{ blog.user.name }}</span></div>
+          </a>
           <div class="date meta-last">{{ blog.created_at | date }}</div>
-          <div class="category"><a href="#">Business</a></div>
-        </div><a href="post.html">
-        <h3 class="h4">{{ blog.title }}</h3></a>
-        <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-          <div class="avatar"><img src="https://d19m59y37dris4.cloudfront.net/blog/1-2-1/img/avatar-3.jpg" alt="..." class="img-fluid"></div>
-          <div class="title"><span>{{ blog.user.name }}</span></div></a>
         </footer>
       </div>
     </div>

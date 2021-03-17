@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import {Blogpost} from '../blogpost';
 import {BlogpostService} from '../blogpost.service';
+import {SharedService} from '../../shared/shared.service';
 
 @Component({
   selector: 'app-blogpost-list',
@@ -16,7 +17,8 @@ export class BlogpostListComponent implements OnInit {
 
   constructor(
     private titleService: Title,
-    private blogPostService: BlogpostService
+    private blogPostService: BlogpostService,
+    public sharedService: SharedService
   ) { }
 
   ngOnInit(): void {
