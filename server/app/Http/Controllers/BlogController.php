@@ -21,6 +21,11 @@ class BlogController extends Controller
         return response()->json($blogs);
     }
 
+    public function latestBlog(){
+        $blogs = Blog::with(['blog_category.category', 'blog_tag.tag', 'user'])->orderBy('id', 'DESC')->take(3)->get();
+        return response()->json($blogs);
+    }
+
     public function store(Request $request){
         $validatedData = $request->validate([
             'title' => ['required'],

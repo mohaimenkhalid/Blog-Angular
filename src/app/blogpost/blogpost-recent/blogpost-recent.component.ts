@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {BlogpostService} from '../blogpost.service';
+import {SharedService} from '../../shared/shared.service';
+import {Blogpost} from '../blogpost';
 
 @Component({
   selector: 'app-blogpost-recent',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlogpostRecentComponent implements OnInit {
 
-  constructor() { }
+  public blogs: Blogpost[];
+  public error: {};
+
+  constructor(
+    private blogPostService: BlogpostService,
+    public sharedService: SharedService
+  ) { }
 
   ngOnInit(): void {
+    this.blogPostService.getLatestBlog()
+      .subscribe((data: Blogpost[]) => this.blogs = data,
+        error => this.error = error
+      );
   }
 
 }

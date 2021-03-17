@@ -31,4 +31,5 @@ Route::group(['middleware' => 'CROS'], function() {
     Route::post('/blog/create', 'BlogController@store');
     Route::get('/single-blog/{slug}', 'BlogController@show');
     Route::get('/all-blog-list', 'BlogController@index');
+    Route::get('/latest-blog-list', 'BlogController@latestBlog');
 });

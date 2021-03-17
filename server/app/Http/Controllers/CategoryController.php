@@ -22,7 +22,7 @@ class CategoryController extends Controller
 
     public function all_category(){
         $categories = Category::all();
-        return response()->json(['categories' => $categories]);
+        return response()->json($categories);
     }
 
     public function edit_category($id){

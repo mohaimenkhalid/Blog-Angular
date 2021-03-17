@@ -30,6 +30,12 @@ export class BlogpostService {
     );
   }
 
+  getLatestBlog(): Observable<Blogpost[]> {
+    return this.http.get<Blogpost[]>(this.baseUrl + '/api/latest-blog-list').pipe(
+      catchError(this.handleError)
+    );
+  }
+
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.baseUrl + '/api/all-category').pipe(
       catchError(this.handleError)
