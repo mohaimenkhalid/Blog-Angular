@@ -10,6 +10,7 @@ import {throwError} from 'rxjs';
 export class AuthService {
   baseUrl = this.sharedService.baseUrl;
   errorData: {};
+  redirectUrl: string;
 
   isLoggedIn = false;
 
@@ -49,7 +50,7 @@ export class AuthService {
   }
 
   private handleError = (error: HttpResponse<any>) => {
-    if (error.error instanceof ErrorEvent) {
+   /* if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);
     } else {
       console.error(`Backend return code ${error.status}`);
@@ -58,6 +59,7 @@ export class AuthService {
       errorTitle: 'Oops! Request failed.',
       errorDesc: 'Something went wrong. Please try again later.'
     };
+    return throwError(this.errorData);*/
     return throwError(this.errorData);
   }
 }
