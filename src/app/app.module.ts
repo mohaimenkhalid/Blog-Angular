@@ -12,6 +12,7 @@ import { BannerComponent } from './banner/banner.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AdminModule } from './admin/admin.module';
 import { AuthModule } from './auth/auth.module';
+import {httpInterceptorProviders} from './http-interceptors';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { AuthModule } from './auth/auth.module';
     AuthModule,
     AppRoutingModule,
   ],
-  providers: [Title],
+  providers: [Title, httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

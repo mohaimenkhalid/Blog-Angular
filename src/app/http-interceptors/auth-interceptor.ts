@@ -9,8 +9,8 @@ export class AuthInterceptor {
   constructor(private authService: AuthService) {
   }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (this.authService.isLoggedIn) {
+  intercept = (req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> => {
+    if (this.authService.isLogin()) {
       const authToken = this.authService.getAuthorizationToken();
       req = req.clone({
         setHeaders: {

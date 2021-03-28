@@ -50,8 +50,8 @@ export class AuthService {
   }
 
   private handleError = (error: HttpResponse<any>) => {
-   /* if (error.error instanceof ErrorEvent) {
-      console.error('An error occurred:', error.error.message);
+    if (error instanceof ErrorEvent) {
+      console.error('An error occurred:', error);
     } else {
       console.error(`Backend return code ${error.status}`);
     }
@@ -59,7 +59,6 @@ export class AuthService {
       errorTitle: 'Oops! Request failed.',
       errorDesc: 'Something went wrong. Please try again later.'
     };
-    return throwError(this.errorData);*/
     return throwError(this.errorData);
   }
 }
