@@ -26,18 +26,13 @@
       <!-- Navbar Menu -->
       <div id="navbarcollapse" class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">Home</a>
-          </li>
-          <li class="nav-item"><a routerLink="/blog" routerLinkActive="active" class="nav-link ">Blog</a>
-          </li>
-          <li class="nav-item"><a routerLink="/pages/about" routerLinkActive="active" class="nav-link ">About</a>
-          </li>
-          <li class="nav-item"><a routerLink="/contact" routerLinkActive="active" class="nav-link ">Contact</a>
-          </li>
-          <li class="nav-item"><a routerLink="/login" routerLinkActive="active" class="nav-link ">Login</a>
-          </li>
-          <li class="nav-item"><a routerLink="/register" routerLinkActive="active" class="nav-link ">Register</a>
-          </li>
+          <li class="nav-item"><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">Home</a></li>
+          <li class="nav-item"><a routerLink="/blog" routerLinkActive="active" class="nav-link ">Blog</a></li>
+          <li class="nav-item"><a routerLink="/pages/about" routerLinkActive="active" class="nav-link ">About</a></li>
+          <li class="nav-item"><a routerLink="/contact" routerLinkActive="active" class="nav-link ">Contact</a></li>
+          <li *ngIf="!isLoggedIn" class="nav-item"><a routerLink="/login" routerLinkActive="active" class="nav-link ">Login</a></li>
+          <li *ngIf="!isLoggedIn" class="nav-item"><a routerLink="/register" routerLinkActive="active" class="nav-link ">Register</a></li>
+          <li *ngIf="isLoggedIn" class="nav-item"><a routerLink="/admin" routerLinkActive="active" class="nav-link ">Dashboard</a></li>
         </ul>
       </div>
     </div>

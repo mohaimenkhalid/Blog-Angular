@@ -49,16 +49,19 @@ export class AuthService {
     return currentUser.access_token;
   }
 
-  private handleError = (error: HttpResponse<any>) => {
+  private handleError = (error) => {
     if (error instanceof ErrorEvent) {
       console.error('An error occurred:', error);
     } else {
+      this.errorData = {
+        login_error: error.error.error
+      };
       console.error(`Backend return code ${error.status}`);
+      this.errorData = {
+        ...this.errorData,
+        error: error.statusText
+      };
     }
-    this.errorData = {
-      errorTitle: 'Oops! Request failed.',
-      errorDesc: 'Something went wrong. Please try again later.'
-    };
     return throwError(this.errorData);
   }
 }
