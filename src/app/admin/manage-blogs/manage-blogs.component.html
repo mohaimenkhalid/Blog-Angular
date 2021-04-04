@@ -1,1 +1,42 @@
-<p>manage-blogs works!</p>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card mt-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between mb-3">
+          <h4>All blog lists</h4>
+          <a class="btn btn-primary">Create Blog</a>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Serial No</th>
+              <th>Image</th>
+              <th>Title</th>
+              <th>publish</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr [class.d-none] = !loader>
+            <td colspan="5">
+              <div class="text-center mt-4"><i class="fa fa-spinner fa-spin" style="font-size: 18px"></i> Loading...</div>
+            </td>
+          </tr>
+            <tr *ngFor="let blog of blogs">
+              <td>#</td>
+              <td>
+                <img src="{{ this.adminService.baseUrl + blog.cover_image_url }}" width="80px">
+              </td>
+              <td>{{ blog.title }}</td>
+              <td>{{ blog.created_at | date }}</td>
+              <td>
+                <button class="btn btn-info btn-sm mr-1">Edit</button>
+                <button class="btn btn-danger btn-sm">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

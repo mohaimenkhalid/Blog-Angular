@@ -42,7 +42,7 @@ export class BlogpostService {
     );
   }
 
-  private handleError(error: HttpResponse<any>) {
+  private handleError (error: HttpResponse<any>) {
     // @ts-ignore
     if (error.error instanceof ErrorEvent) {
       // @ts-ignore
