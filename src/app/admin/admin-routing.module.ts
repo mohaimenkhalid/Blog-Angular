@@ -15,7 +15,7 @@ const routes: Routes = [
         children: [
           { path: 'blogs', component: ManageBlogsComponent},
           { path: 'blogs/create', component: BlogFormComponent},
-          { path: 'blogs/edit/:id', component: BlogFormComponent},
+          { path: 'blogs/edit/:slug', component: BlogFormComponent},
           { path: 'categories', component: ManageBlogsComponent},
           { path: '', component: AdminDashboardComponent},
         ]
