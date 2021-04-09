@@ -52,8 +52,8 @@ class BlogController extends Controller
 
         //save category & tag
 
-        if($request->blog_selected_category){
-            foreach ($request->blog_selected_category as $category){
+        if($request->category_id){
+            foreach ($request->category_id as $category){
                 $blog_category = new BlogToCategory();
                 $blog_category->blog_id = $blog->id;
                 $blog_category->category_id = $category['id'];
@@ -61,8 +61,8 @@ class BlogController extends Controller
             }
         }
 
-        if($request->blog_selected_tag){
-            foreach ($request->blog_selected_tag as $tag){
+        if($request->tag_id){
+            foreach ($request->tag_id as $tag){
                 $blog_tag = new BlogToTag();
                 $blog_tag->blog_id = $blog->id;
                 $blog_tag->tag_id = $tag['id'];

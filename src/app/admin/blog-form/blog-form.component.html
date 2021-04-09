@@ -8,18 +8,25 @@
           <div class="form-group">
             <label>Title</label>
             <input type="text" formControlName="title" class="form-control" placeholder="Enter title" required>
-            <!--<div *ngIf="title.invalid && (title.dirty || title.touched)">
+            <div *ngIf="title.invalid && (title.dirty || title.touched)">
               <div *ngIf="title.errors.required" class="text-danger">
                 Title is required.
               </div>
-            </div>-->
+            </div>
           </div>
           <div class="form-group">
             <label>Category</label>
-            <select class="form-control">
-              <option>Select category</option>
-              <option>Article</option>
-            </select>
+            <ng-multiselect-dropdown
+              formControlName="category_id"
+              [placeholder]="'Select Category'"
+              [settings]="dropdownSettings"
+              [data]="categoryList">
+            </ng-multiselect-dropdown>
+            <div *ngIf="category.invalid && (category.dirty || category.touched)">
+              <div *ngIf="category.errors.required" class="text-danger">
+                Category is required.
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label>Cover Image</label>
@@ -28,6 +35,7 @@
           <div class="form-group">
             <label>Body</label>
             <editor
+              formControlName="body"
               [init]="{
                  height: 400,
                  menubar: true,
@@ -38,6 +46,11 @@
                  ]
                 }"
             ></editor>
+            <div *ngIf="body.invalid && (body.dirty || body.touched)">
+              <div *ngIf="body.errors.required" class="text-danger">
+                Description is required.
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <button class="btn btn-success float-right">Submit</button>

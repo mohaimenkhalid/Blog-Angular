@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BlogService} from '../../services/blog.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../auth/auth.service';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-blog-form',
@@ -16,6 +17,9 @@ export class BlogFormComponent implements OnInit {
   imagePath: string;
   blogForm: FormGroup;
 
+  categoryList = [];
+  dropdownSettings = {};
+
   constructor(
     private fb: FormBuilder,
     private blogService: BlogService,
@@ -25,16 +29,36 @@ export class BlogFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.blogService.getCategories().subscribe(
+      (data) => {
+        this.categoryList = data;
+      },
+      error => console.log(error)
+    );
+
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
+
+
+
     const slug = this.route.snapshot.paramMap.get('slug');
     if (slug) {
       this.blogService.getBlog(+slug).subscribe(
         res => {
           this.blogForm.patchValue({
+            id: res.id,
             title: res.title,
             body: res.title,
             user_id: res.user_id,
-            category_id: res.blog_category,
-            id: res.id
+            category_id: res.blog_category
           });
           this.imagePath = res.cover_image_url;
         }
@@ -46,10 +70,18 @@ export class BlogFormComponent implements OnInit {
       user_id: [this.authService.getAuthUserId()],
       title: ['', Validators.required],
       body: ['', Validators.required],
-      category_id: ['', Validators.required],
-      cover_image: ['', Validators.required],
+      category_id: [[], Validators.required],
+      cover_image: ['']
     });
   }
+
+  /*onItemSelect(item: any) {
+    console.log('selectedCategories', item);
+  }*/
+
+  get title() { return this.blogForm.get('title'); }
+  get body() { return this.blogForm.get('body'); }
+  get category() { return this.blogForm.get('category_id'); }
 
   onSelectedFile = (event) => {
     if (event.target.file.length > 0) {

@@ -3,6 +3,7 @@ import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {Blogpost} from '../blogpost/blogpost';
 import {catchError} from 'rxjs/operators';
+import {Category} from '../blogpost/category';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,12 @@ export class BlogService {
       .pipe(
         catchError(this.handleError)
       );
+  }
+
+  getCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(this.serverUrl + '/api/all-category').pipe(
+      catchError(this.handleError)
+    );
   }
 
   private handleError = (error: HttpResponse<any>) => {

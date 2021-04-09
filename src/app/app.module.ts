@@ -13,6 +13,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AdminModule } from './admin/admin.module';
 import { AuthModule } from './auth/auth.module';
 import {httpInterceptorProviders} from './http-interceptors';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {httpInterceptorProviders} from './http-interceptors';
     AdminModule,
     AuthModule,
     AppRoutingModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [Title, httpInterceptorProviders],
   bootstrap: [AppComponent]
