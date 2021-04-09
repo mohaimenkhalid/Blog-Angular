@@ -49,6 +49,11 @@ export class AuthService {
     return currentUser.access_token;
   }
 
+  getAuthUserId = () => {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    return currentUser.user_id;
+  }
+
   private handleError = (error) => {
     if (error instanceof ErrorEvent) {
       console.error('An error occurred:', error);
