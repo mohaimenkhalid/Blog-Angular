@@ -12,7 +12,8 @@ import {SharedService} from '../../shared/shared.service';
 export class BlogpostListComponent implements OnInit {
 
   title = 'All Blogs list';
-  public blogs: Blogpost[];
+  public blogs;
+  public blogListDetails;
   error: {};
 
   constructor(
@@ -25,8 +26,28 @@ export class BlogpostListComponent implements OnInit {
     this.titleService.setTitle(this.title);
     this.blogPostService.getBlogs()
       .subscribe(
-        (data: Blogpost[]) => this.blogs = data,
+        (data) => {
+          this.blogListDetails = data;
+          this.blogs = data.data;
+          if (data) {
+            console.log(data);
+          }
+        },
         error => this.error = error
         );
+  }
+
+  numSequence(n: number): Array<number> {
+    return Array(n);
+  }
+
+  public blogPaginateJump = (url) => {
+    this.blogPostService.getBlogPaginate(url)
+      .subscribe(
+        (data) => {
+          this.blogListDetails = data;
+          this.blogs = data.data;
+        }
+      );
   }
 }

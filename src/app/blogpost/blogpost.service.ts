@@ -18,7 +18,7 @@ export class BlogpostService {
     this.baseUrl = sharedService.baseUrl;
   }
 
-  getBlogs(): Observable<Blogpost[]> {
+  getBlogs(): Observable<any> {
     return this.http.get<Blogpost[]>(this.baseUrl + '/api/all-blog-list').pipe(
       catchError(this.handleError)
     );
@@ -38,6 +38,13 @@ export class BlogpostService {
 
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.baseUrl + '/api/all-category').pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getBlogPaginate(url): Observable<any> {
+    return this.http.get<Blogpost[]>(url)
+      .pipe(
       catchError(this.handleError)
     );
   }

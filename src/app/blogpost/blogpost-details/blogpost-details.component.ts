@@ -11,21 +11,28 @@ import {SharedService} from '../../shared/shared.service';
   styleUrls: ['./blogpost-details.component.css']
 })
 export class BlogpostDetailsComponent implements OnInit {
-
-  blog$: Blogpost;
+  public blog$;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private blogPostService: BlogpostService,
     private titleService: Title,
     public sharedService: SharedService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.blogPostService.getBlog(params.get('slug'))
-        .subscribe((data) => this.blog$ = data);
+        .subscribe((data) => {
+          this.blog$ = data;
+          this.setTitle(data);
+        });
     });
   }
 
+  setTitle = (data) => {
+    if (data) {
+      this.titleService.setTitle(this.blog$.blog.title);
+    }
+  }
 }
