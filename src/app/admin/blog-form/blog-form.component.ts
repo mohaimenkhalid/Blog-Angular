@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BlogService} from '../../services/blog.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../auth/auth.service';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-blog-form',
@@ -25,7 +25,8 @@ export class BlogFormComponent implements OnInit {
     private blogService: BlogService,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -43,7 +44,7 @@ export class BlogFormComponent implements OnInit {
       textField: 'name',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
+      itemsShowLimit: 5,
       allowSearchFilter: true
     };
 
@@ -75,33 +76,31 @@ export class BlogFormComponent implements OnInit {
     });
   }
 
-  /*onItemSelect(item: any) {
-    console.log('selectedCategories', item);
-  }*/
-
   get title() { return this.blogForm.get('title'); }
   get body() { return this.blogForm.get('body'); }
   get category() { return this.blogForm.get('category_id'); }
 
   onSelectedFile = (event) => {
-    if (event.target.file.length > 0) {
-      const file = event.target.file[0];
-      this.blogForm.get('cover_image').setValue(file);
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      if (file.size < 2111775) {
+        reader.onloadend = (loadedFile) => {
+          this.blogForm.get('cover_image').setValue(loadedFile.target.result);
+        };
+        reader.readAsDataURL(file);
+      }else {
+        alert('File size can not be bigger than 2 MB');
+      }
     }
   }
 
   onSubmit() {
-    const formData = new FormData();
-    formData.append('title', this.blogForm.get('title').value);
-    formData.append('body', this.blogForm.get('body').value);
-    formData.append('category_id', this.blogForm.get('category_id').value);
-    formData.append('cover_image', this.blogForm.get('cover_image').value);
-    formData.append('user_id', this.blogForm.get('user_id').value);
 
     const id = this.blogForm.get('id').value;
 
     if (id) {
-      this.blogService.updateBlog(formData, +id)
+      this.blogService.updateBlog(this.blogForm.value, +id)
         .subscribe(res => {
           if (res.error) {
             this.uploadError = res.message;
@@ -110,9 +109,10 @@ export class BlogFormComponent implements OnInit {
           }
         }, error => this.error = error);
     } else {
-      this.blogService.createBlog(formData).subscribe(
+      this.blogService.createBlog(this.blogForm.value).subscribe(
         res => {
           if (res.success) {
+             this.toastr.success('Blog created successfully.!', 'Success!');
              this.router.navigate(['/admin/blogs']);
           } else {
              this.uploadError = 'Something went wrong';

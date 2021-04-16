@@ -26,7 +26,8 @@ export class BlogService {
   }
 
   createBlog(blog): any {
-    return this.http.post<any>(this.serverUrl + '/api/single-blog', blog)
+    console.log(blog);
+    return this.http.post<any>(this.serverUrl + '/api/blog/create', blog)
       .pipe(
         catchError(this.handleError)
       );

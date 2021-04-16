@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -43,6 +45,7 @@ export class LoginComponent implements OnInit {
       .subscribe((data) => {
         if (this.authService.isLoggedIn) {
           const redirect = '/admin';
+          this.toastr.success('Login successfully.!', 'Success!');
           this.router.navigate([redirect]);
         } else {
           this.loginError = 'Email or password is incorrect.';
@@ -52,6 +55,7 @@ export class LoginComponent implements OnInit {
         (error) => {
           this.error = error;
           this.submitted = false;
+          this.toastr.error(error.login_error, 'Error!');
       }
       );
   }
