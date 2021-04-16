@@ -72,6 +72,7 @@ export class BlogFormComponent implements OnInit {
       title: ['', Validators.required],
       body: ['', Validators.required],
       category_id: [[], Validators.required],
+      cover_image_validation: ['', Validators.required],
       cover_image: ['']
     });
   }
@@ -79,6 +80,7 @@ export class BlogFormComponent implements OnInit {
   get title() { return this.blogForm.get('title'); }
   get body() { return this.blogForm.get('body'); }
   get category() { return this.blogForm.get('category_id'); }
+  get coverImage() { return this.blogForm.get('cover_image_validation'); }
 
   onSelectedFile = (event) => {
     if (event.target.files.length > 0) {
