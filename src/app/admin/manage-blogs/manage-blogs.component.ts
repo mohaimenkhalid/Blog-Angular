@@ -10,18 +10,34 @@ import {BlogService} from '../../services/blog.service';
 })
 export class ManageBlogsComponent implements OnInit {
 
-  public blogs: Blogpost[];
+  public blogs = [];
   public loader = true;
+  public blogListDetails;
   constructor(public blogService: BlogService) { }
 
   ngOnInit(): void {
     this.blogService.getBlogs().subscribe(
       (data) => {
-        this.blogs = data,
+        this.blogs = data.data,
+        this.blogListDetails = data;
         this.loader = false;
       },
       error => console.log(error)
     );
+  }
+
+  numSequence(n: number): Array<number> {
+    return Array(n);
+  }
+
+  public blogPaginateJump = (url) => {
+    this.blogService.getBlogPaginate(url)
+      .subscribe(
+        (data) => {
+          this.blogListDetails = data;
+          this.blogs = data.data;
+        }
+      );
   }
 
 }

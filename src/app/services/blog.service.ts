@@ -13,10 +13,17 @@ export class BlogService {
   public serverUrl = 'http://localhost:8000';
   constructor(private http: HttpClient) { }
 
-  getBlogs(): Observable<Blogpost[]> {
+  getBlogs(): Observable<any> {
     return this.http.get<Blogpost[]>(this.serverUrl + '/api/all-blog-list').pipe(
       catchError(this.handleError)
     );
+  }
+
+  getBlogPaginate(url): Observable<any> {
+    return this.http.get<Blogpost[]>(url)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   getBlog(slug): Observable<Blogpost> {

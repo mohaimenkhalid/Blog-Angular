@@ -1,6 +1,10 @@
 <!-- Latest Posts -->
 <div class="container mt-5">
+  <h3 class="text-center mb-5">All Blog Lists</h3>
   <div class="row">
+    <div class="col-md-12" *ngIf="loader">
+        <i class="fa fa-spinner fa-spin"></i> Loading...
+    </div>
     <!-- post -->
     <div class="post col-xl-4" *ngFor="let blog of blogs">
       <div class="post-thumbnail"><a [routerLink]="['/blog', blog.slug]"><img src="{{ this.sharedService.baseUrl + blog.cover_image_url }}" alt="..." class="img-fluid"></a></div>
@@ -25,11 +29,13 @@
 
   </div>
   <!-- Pagination -->
-  <nav aria-label="Page navigation example" *ngIf="blogListDetails">
-    <ul class="pagination pagination-template d-flex justify-content-center">
-      <li class="page-item"><button class="page-link" [disabled]="blogListDetails.prev_page_url == null" (click)="blogPaginateJump(blogListDetails.prev_page_url)"> <i class="fa fa-angle-left"></i></button></li>
-      <li class="page-item" *ngFor="let page of numSequence(blogListDetails.last_page); index as i"><button (click)="blogPaginateJump(blogListDetails.path+'?page='+(i+1))" class="page-link">{{ i+1 }}</button></li>
-      <li class="page-item"><button class="page-link" [disabled]="blogListDetails.next_page_url == null" (click)="blogPaginateJump(blogListDetails.next_page_url)"> <i class="fa fa-angle-right"></i></button></li>
-    </ul>
-  </nav>
+ <div class="mt-5 mb-5">
+   <nav aria-label="Page navigation example" *ngIf="blogListDetails">
+     <ul class="pagination pagination-template d-flex">
+       <li class="page-item"><button class="page-link" [disabled]="blogListDetails.prev_page_url == null" (click)="blogPaginateJump(blogListDetails.prev_page_url)"> <i class="fa fa-angle-left"></i></button></li>
+       <li class="page-item" *ngFor="let page of numSequence(blogListDetails.last_page); index as i"><button (click)="blogPaginateJump(blogListDetails.path+'?page='+(i+1))" class="page-link">{{ i+1 }}</button></li>
+       <li class="page-item"><button class="page-link" [disabled]="blogListDetails.next_page_url == null" (click)="blogPaginateJump(blogListDetails.next_page_url)"> <i class="fa fa-angle-right"></i></button></li>
+     </ul>
+   </nav>
+ </div>
 </div>

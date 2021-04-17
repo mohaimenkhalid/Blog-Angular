@@ -17,7 +17,7 @@ use DomDocument;
 class BlogController extends Controller
 {
     public function index(){
-        $blogs = Blog::with(['blog_category.category', 'blog_tag.tag', 'user'])->paginate(2);
+        $blogs = Blog::with(['blog_category.category', 'blog_tag.tag', 'user'])->paginate(6);
         return response()->json($blogs);
     }
 

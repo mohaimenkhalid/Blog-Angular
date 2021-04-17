@@ -2,3 +2,15 @@ button:disabled {
   background: #dddddd;
   cursor: not-allowed;
 }
+
+
+.nav ul{
+  float: left !important;
+  margin: 1rem 1rem;
+}
+
+.post-thumbnail img {
+  height: 250px;
+  width: 100%;
+  text-align: center;
+}

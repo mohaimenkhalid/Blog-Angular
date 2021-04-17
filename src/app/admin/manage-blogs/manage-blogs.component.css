@@ -3,3 +3,8 @@
   background: #f3f3f3;
   width: 100%;
 }
+
+button:disabled {
+  background: #dddddd;
+  cursor: not-allowed;
+}

@@ -11,6 +11,7 @@ import {SharedService} from '../../shared/shared.service';
 })
 export class BlogpostListComponent implements OnInit {
 
+  public loader = true;
   title = 'All Blogs list';
   public blogs;
   public blogListDetails;
@@ -29,9 +30,7 @@ export class BlogpostListComponent implements OnInit {
         (data) => {
           this.blogListDetails = data;
           this.blogs = data.data;
-          if (data) {
-            console.log(data);
-          }
+          this.loader = false;
         },
         error => this.error = error
         );
